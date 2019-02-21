@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=320,maximum-scale=1.3,user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta name="description" content="不超过150个字符"/>
+    <meta name="keywords" content=""/>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+    <title>寻找那只属于我的猪</title>
+    <style>
+
+        html {
+            font-size: 100px;
+        }
+
+        body {
+            font-size: 0.14rem; /*实际相当于14px*/
+            margin: 0;
+        }
+
+        input {
+            padding: 0;
+            width: 2.14rem;
+            height: 0.38rem;
+
+            background-color: #EAE9E5;
+            border: 0.02rem solid rgba(12, 5, 82, 1);
+            border-radius: 0.1rem;
+            text-align: center;
+            outline: none;
+            font-size: 0.14rem;
+            color: #706F6B;
+            -webkit-appearance: none;
+        }
+
+        select {
+            width: 2.16rem;
+            height: 0.41rem;
+            background-color: #EAE9E5;
+            border: 0.02rem solid rgba(12, 5, 82, 1);
+            border-radius: 0.1rem;
+            outline: none;
+            font-size: 0.14rem;
+            color: #706F6B;
+            margin-top: 0.11rem;
+            padding-left: 0.1rem;
+            -webkit-appearance: none;
+            text-align: center !important;
+            text-align-last: center!important;
+        }
+        option{
+            text-align: center;
+        }
+        button {
+            width: 2.16rem;
+            height: 0.41rem;
+            background: rgba(138, 89, 237, 1);
+            border: 0.02rem solid rgba(12, 5, 82, 1);
+            border-radius: 0.1rem;
+            margin-top: 0.11rem;
+            font-size: 0.16rem;
+            font-weight: bold;
+            color: white;
+            outline: none;
+
+        }
+
+        .iphone {
+            margin-top: 0.11rem;
+        }
+
+        .body {
+            width: 100%;
+            height: 15.8rem;
+            background: url("http://app-image-test.cunyougo.com/lantern/h5.png") no-repeat center center;
+            background-size: 100% 100%;
+            position: absolute;
+            overflow: hidden;
+        }
+
+        .content {
+            position: absolute;
+            bottom: 0.56rem;
+            left: 50%;
+            margin-left: -1.1rem;
+        }
+
+    </style>
+    <script>
+        $(function () {
+            $.get('http://hz.cunyougo.com/getWechatInfo/', {url: "http://hz.cunyougo.com/search_pig/"}, function (res) {
+                wx.config({
+                    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                    appId: res.appid, // 必填，公众号的唯一标识
+                    timestamp: res.stamp, // 必填，生成签名的时间戳
+                    nonceStr: res.noncestr, // 必填，生成签名的随机串
+                    signature: res.signa,// 必填，签名
+                    jsApiList: ['updateAppMessageShareData', 'onMenuShareAppMessage', 'updateTimelineShareData'] // 必填，需要使用的JS接口列表
+                });
+                wx.ready(function () {
+                    wx.updateAppMessageShareData({
+                        title: '寻猪启示', // 分享标题
+                        desc: '寻找属于我的那一只猪', // 分享描述
+                        link: "http://hz.cunyougo.com/search_pig/", // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                        imgUrl: 'http://app-image-test.cunyougo.com/lantern/logoa.png', // 分享图标
+                        success: function () {
+
+                        }
+                    });
+                    wx.updateTimelineShareData({
+                        title: '寻猪启示', // 分享标题
+                        desc: '寻找属于我的那一只猪', // 分享描述
+                        link: "http://hz.cunyougo.com/search_pig/", // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                        imgUrl: 'http://app-image-test.cunyougo.com/lantern/logoa.png', // 分享图标
+                        success: function () {
+                            // 设置成功
+                        }
+                    })
+                });
+            })
+            $(".button").click(function () {
+                var name = $(".name").val();
+                var iphone = $(".iphone").val();
+                var regName = /^[\u4e00-\u9fa5]{2,4}$/;
+                var regPhone = /^(((13[0-9]{1})|(14[5,6,9]{1})|(15[0-9]{1})|(16[6|7]{1})|(17[0-9]{1})|(18[0-9]{1})|(19[8|9]{1}))+\d{8})$/;
+                var job = $("#select").find("option:selected").text();
+                if (name == '') {
+                    alert("姓名不能为空！")
+                }
+                else if (iphone == "") {
+                    alert("联系方式不能为空！")
+                }
+                else if (job.indexOf("请选择") != -1) {
+                    alert("请选择职位！")
+                }
+                else if (!regName.test(name)) {
+                    alert("姓名格式不正确！")
+                }
+                else if (!regPhone.test(iphone)) {
+                    alert("手机号码格式不正确！")
+                }
+                else {
+                    $.post("/save_info/", {"name": name, "iphone": iphone, "job": job}, function (res) {
+                        alert("提交成功！")
+                    })
+                }
+            });
+
+        });
+
+
+    </script>
+</head>
+
+<body>
+<div class="body">
+    <div class="content">
+        <input type="text" placeholder="请输入姓名" class="name">
+        <input type="text" maxlength="11" placeholder="请输入联系方式" class="iphone">
+        <select name="" id="select">
+            <option value="0">选择岗位</option>
+            <option value="1">导游</option>
+            <option value="2">物业主管</option>
+            <option value="3">行政主管</option>
+            <option value="4">文旅项目经理</option>
+            <option value="5">文旅运营总监</option>
+        </select>
+        <button class="button">加入我们</button>
+
+    </div>
+</div>
+</body>
+</html>

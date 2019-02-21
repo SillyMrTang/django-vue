@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta name="description" content="不超过150个字符"/>
+    <meta name="keywords" content=""/>
+    <title>年味测试</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.21/vue.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .body {
+            width: 100%;
+            height: 768px;
+            background: url("http://app-image-test.cunyougo.com/flavor/bg8.png") no-repeat center;
+            background-size: 100% 100%;
+            position: relative;
+        }
+        .footer {
+            width: 100%;
+            height: 100px;
+            background: url("http://app-image-test.cunyougo.com/flavor/bg1_3.png") no-repeat center;
+            background-size: 100% 100%;
+            position: absolute;
+            bottom: -100px;
+        }
+        .content {
+            position: absolute;
+            left: 50%;
+            margin-left: -75px;
+            bottom: 120px;
+        }
+
+        .select {
+            width: 166px;
+            height: 28px;
+            background: rgb(162, 33, 20);
+            box-shadow: 0px -10px 25px 2.5px rgba(185, 55, 9, 0.52);
+            border-radius: 5px;
+            font-weight: 400;
+            color: #DE8780;
+            font-size: 12px;
+            padding-left: 10px;
+        }
+
+        .button {
+            width: 159px;
+            height: 55px;
+            background: url("http://app-image-test.cunyougo.com/flavor/button.png") no-repeat center;
+            background-size: 100% 100%;
+            margin-top: 15px;
+        }
+
+        input, textarea, select, a:focus {
+            outline: none;
+            border: none;
+        }
+        select {
+        -webkit-appearance: none; /*兼容苹果手机*/
+        }
+    </style>
+    <script>
+        $(function () {
+            var value = "";
+            var height = $(window).height();
+
+            $("#mySelect").change(function () {
+                value = $("#mySelect").val()
+
+            });
+            $(".button").click(function () {
+                if(value == ""){
+                    alert("请选择你的家乡")
+                }else{
+                    window.location.href = "http://hz.cunyougo.com/flavor/detail/?city=" + value;
+                }
+            })
+
+        })
+
+    </script>
+</head>
+
+<body>
+<div class="body">
+    <div class="content">
+        <select class="select" id="mySelect">
+            <option disabled selected>选择一下你的家乡吧</option>
+            <option value="0">杭州</option>
+            <option value="1">宁波</option>
+            <option value="2">温州</option>
+            <option value="3">绍兴</option>
+            <option value="4">嘉兴</option>
+            <option value="5">湖州</option>
+            <option value="6">金华</option>
+            <option value="7">丽水</option>
+            <option value="8">衢州</option>
+            <option value="9">台州</option>
+            <option value="10">舟山</option>
+        </select>
+        <div class="button"></div>
+    </div>
+    <div class="footer"></div>
+</div>
+</body>
+
+</html>

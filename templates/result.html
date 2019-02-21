@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta name="description" content="不超过150个字符"/>
+    <meta name="keywords" content=""/>
+    <title>年味测试</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.21/vue.min.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+     <script type="text/javascript" src="../static/js/mui.js"></script>
+        <link rel="stylesheet" type="text/css" href="../static/js/mui.css" />
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .body {
+            width: 100%;
+            height: 667px;
+            background: url("http://app-image-test.cunyougo.com/flavor/bg4.png") no-repeat center;
+            background-size: 100% 100%;
+            position: absolute;
+        }
+        .footer {
+            width: 100%;
+            height: 100px;
+            background: url("http://app-image-test.cunyougo.com/flavor/bg1_3.png") no-repeat center;
+            background-size: 100% 100%;
+            position: absolute;
+            bottom: -100px;
+        }
+
+        .centent {
+            position: absolute;
+            top: 220px;
+            left: 50%;
+            margin-left: -145px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .img {
+            width: 290px;
+            height: 140px;
+        }
+
+        .audio {
+            width: 70px;
+            height: 70px;
+            margin-top: 30px;
+        }
+
+        .lf-button {
+            width: 159px;
+            height: 55px;
+            background: url("http://app-image-test.cunyougo.com/flavor/button3.png") no-repeat center;
+            background-size: 100% 100%;
+            margin-left: -20px;
+        }
+
+        .rg-button {
+            width: 159px;
+            height: 55px;
+            background: url("http://app-image-test.cunyougo.com/flavor/button2.png") no-repeat center;
+            background-size: 100% 100%;
+            margin-left: 10px;
+        }
+
+        .bottom-button {
+            display: flex;
+            position: absolute;
+            bottom: 55px;
+            left: 50%;
+            margin-left: -145px;
+        }
+
+        #shareInfoImg {
+            background: url("http://app-image-test.cunyougo.com/flavor/neirong5.png") no-repeat center center;
+            width: 321px;
+            height: 394px;
+            background-size: 100% 100%;
+            position: fixed;
+            z-index: 3;
+            top: 30px;
+            bottom: 0px;
+            left: 40px;
+            right: 0;
+        }
+
+        #icon-2 {
+
+            background: url("http://app-image-test.cunyougo.com/active/close2.png") no-repeat center center;
+            position: fixed;
+            z-index: 3;
+            top: 450px;
+            bottom: 0px;
+            left: 0px;
+            right: 0;
+        }
+        .icon-2 {
+
+            background: url("http://app-image-test.cunyougo.com/active/close2.png") no-repeat center center;
+            position: fixed;
+            z-index: 3;
+            top: 510px;
+            bottom: 0px;
+            left: 0px;
+            right: 0;
+        }
+        #shareInfo {
+            width: 100%;
+            height: 800px;
+            background-color: #000;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            opacity: 0.8;
+            /*兼容IE8及以下版本浏览器*/
+            filter: alpha(opacity=30);
+        }
+        .shareInfo {
+            width: 100%;
+            height: 800px;
+            background-color: #000;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            opacity: 0.8;
+            /*兼容IE8及以下版本浏览器*/
+            filter: alpha(opacity=30);
+        }
+        .text{
+            position: absolute;
+            z-index: 3;
+            top: 440px;
+            left: 50%;
+            margin-left: -65px;
+            font-size:14px;
+            color: white;
+        }
+        #shareInfoImg2 {
+            /*background: url("http://app-image-test.cunyougo.com/flavor/2taizhou_w.png") no-repeat center center;*/
+            width: 321px;
+            height: 394px;
+            background-size: 100% 100%;
+            position: fixed;
+            z-index: 3;
+            top: 50px;
+            left: 50%;
+            margin-left: -135px;
+
+        }
+    </style>
+    <script>
+        $(function () {
+            var res = getUrlParam("res");
+            var city = getUrlParam("city");
+            var music = document.getElementById("audioBtn");
+            var height = $(window).height();
+
+            document.addEventListener("WeixinJSBridgeReady", function () {
+                music.play();
+            }, false);
+            $("#shareInfo").hide();
+            $("#shareInfoImg").hide();
+            $(".shareInfo").hide();
+            $("#shareInfoImg2").hide();
+            switch (res) {
+                case "false":
+                    $(".body").css("background", "url(http://app-image-test.cunyougo.com/flavor/bg4.png) no-repeat center");
+                    $(".body").css("background-size", "100% 100%");
+
+                    switch (parseInt(city)) {
+                        case 0:
+                            $(".img").attr('src', "http://app-image-test.cunyougo.com/flavor/1hangzhou_w.png");
+                            $("#audioBtn").attr('src', "http://app-image-test.cunyougo.com/flavor/杭州假.mp3");
+                            $("#scream").attr('src', "http://app-image-test.cunyougo.com/flavor/2hangzhou_w.png");
+                            break;
+                        case 1:
+                            $(".img").attr('src', "http://app-image-test.cunyougo.com/flavor/1ningbo_w.png");
+                            $("#scream").attr('src', "http://app-image-test.cunyougo.com/flavor/2ningbo_w.png");
+                            $("#audioBtn").attr('src', "http://app-image-test.cunyougo.com/flavor/宁波假.mp3");
+                            break;
+                        case 2:
+                            $(".img").attr('src', "http://app-image-test.cunyougo.com/flavor/1wenzhou_w.png");
+                            $("#scream").attr('src', "http://app-image-test.cunyougo.com/flavor/2wenzhou_w.png");
+                            $("#audioBtn").attr('src', "http://app-image-test.cunyougo.com/flavor/温州假.mp3");
+                            break;
+                        case 3:
+                            $(".img").attr('src', "http://app-image-test.cunyougo.com/flavor/1shaoxing_w.png");
+                            $("#scream").attr('src', "http://app-image-test.cunyougo.com/flavor/2shaoxing_w.png");
+                            $("#audioBtn").attr('src', "http://app-image-test.cunyougo.com/flavor/绍兴假.mp3");
+                            break;
+                        case 4:
+                            $(".img").attr('src', "http://app-image-test.cunyougo.com/flavor/1jiaxing_w.png");
+                            $("#scream").attr('src', "http://app-image-test.cunyougo.com/flavor/2jiaxing_w.png");
+
+                            $("#audioBtn").attr('src', "http://app-image-test.cunyougo.com/flavor/嘉兴2假.mp3");
+                            break;
+                        case 5:
+                            $(".img").attr('src', "http://app-image-test.cunyougo.com/flavor/1huzhou_w.png");
+                            $("#audioBtn").attr('src', "http://app-image-test.cunyougo.com/flavor/湖州假.mp3");
+                            break;
+                        case 6:
+                            $(".img").attr('src', "http://app-image-test.cunyougo.com/flavor/1jinhua_w.png");
+                            $("#scream").attr('src', "http://app-image-test.cunyougo.com/flavor/2jinhua_w.png");
+                            $("#audioBtn").attr('src', "http://app-image-test.cunyougo.com/flavor/金华假.mp3");
+                            break;
+                        case 7:
+                            $(".img").attr('src', "http://app-image-test.cunyougo.com/flavor/1lishui_w.png");
+                            $("#scream").attr('src', "http://app-image-test.cunyougo.com/flavor/2lishui_w.png");
+                            $("#audioBtn").attr('src', "http://app-image-test.cunyougo.com/flavor/丽水假.mp3");
+                            break;
+                        case 8:
+                            $(".img").attr('src', "http://app-image-test.cunyougo.com/flavor/1quzhou_w.png");
+                            $("#scream").attr('src', "http://app-image-test.cunyougo.com/flavor/2quzhou_w.png");
+                            $("#audioBtn").attr('src', "http://app-image-test.cunyougo.com/flavor/衢州假.mp3");
+                            break;
+                        case 9:
+                            $(".img").attr('src', "http://app-image-test.cunyougo.com/flavor/1taizhou_w.png");
+                            $("#scream").attr('src', "http://app-image-test.cunyougo.com/flavor/2taizhou_w.png");
+                            $("#audioBtn").attr('src', "http://app-image-test.cunyougo.com/flavor/台州假.mp3");
+                            break;
+                        case 10:
+                            $(".img").attr('src', "http://app-image-test.cunyougo.com/flavor/1zhoushan_w.png");
+                            $("#scream").attr('src', "http://app-image-test.cunyougo.com/flavor/2zhoushan_w.png");
+                            $("#audioBtn").attr('src', "http://app-image-test.cunyougo.com/flavor/舟山假.mp3");
+                            break
+                    }
+                    break;
+                case "true":
+                    $(".body").css("background", "url(http://app-image-test.cunyougo.com/flavor/bg3.png) no-repeat center");
+                    $(".body").css("background-size", "100% 100%");
+
+                    switch (parseInt(city)) {
+
+                        case 0:
+                            $(".img").attr('src', "http://app-image-test.cunyougo.com/flavor/1hangzhou_r.png");
+                            $("#scream").attr('src', "http://app-image-test.cunyougo.com/flavor/2hangzhou_r.png");
+                            $("#audioBtn").attr('src', "http://app-image-test.cunyougo.com/flavor/杭州真.mp3");
+                            break;
+                        case 1:
+                            $(".img").attr('src', "http://app-image-test.cunyougo.com/flavor/1ningbo_r.png");
+                            $("#scream").attr('src', "http://app-image-test.cunyougo.com/flavor/2ningbo_r.png");
+                            $("#audioBtn").attr('src', "http://app-image-test.cunyougo.com/flavor/宁波真.mp3");
+                            break;
+                        case 2:
+                            $(".img").attr('src', "http://app-image-test.cunyougo.com/flavor/1wenzhou_r.png");
+                            $("#scream").attr('src', "http://app-image-test.cunyougo.com/flavor/2wenzhou_r.png");
+                            $("#audioBtn").attr('src', "http://app-image-test.cunyougo.com/flavor/温州真.mp3");
+                            break;
+                        case 3:
+                            $(".img").attr('src', "http://app-image-test.cunyougo.com/flavor/1shaoxing_r.png");
+                            $("#scream").attr('src', "http://app-image-test.cunyougo.com/flavor/2shaoxing_r.png");
+                            $("#audioBtn").attr('src', "http://app-image-test.cunyougo.com/flavor/绍兴真.mp3");
+                            break;
+                        case 4:
+                            $(".img").attr('src', "http://app-image-test.cunyougo.com/flavor/1jiaxing_r.png");
+                            $("#scream").attr('src', "http://app-image-test.cunyougo.com/flavor/2jiaxing_r.png");
+                            $("#audioBtn").attr('src', "http://app-image-test.cunyougo.com/flavor/嘉兴2真.mp3");
+                            break;
+                        case 5:
+                            $(".img").attr('src', "http://app-image-test.cunyougo.com/flavor/1huzhou_r.png");
+                            $("#scream").attr('src', "http://app-image-test.cunyougo.com/flavor/2huzhou_r.png");
+                            $("#audioBtn").attr('src', "http://app-image-test.cunyougo.com/flavor/湖州真.mp3");
+                            break;
+                        case 6:
+                            $(".img").attr('src', "http://app-image-test.cunyougo.com/flavor/1jinhua_r.png");
+                            $("#scream").attr('src', "http://app-image-test.cunyougo.com/flavor/2jinhua_r.png");
+                            $("#audioBtn").attr('src', "http://app-image-test.cunyougo.com/flavor/金华真.mp3");
+                            break;
+                        case 7:
+                            $(".img").attr('src', "http://app-image-test.cunyougo.com/flavor/1lishui_r.png");
+                            $("#scream").attr('src', "http://app-image-test.cunyougo.com/flavor/2lishui_r.png");
+                            $("#audioBtn").attr('src', "http://app-image-test.cunyougo.com/flavor/丽水真.mp3");
+                            break;
+                        case 8:
+                            $(".img").attr('src', "http://app-image-test.cunyougo.com/flavor/1quzhou_r.png");
+                            $("#scream").attr('src', "http://app-image-test.cunyougo.com/flavor/2quzhou_r.png");
+                            $("#audioBtn").attr('src', "http://app-image-test.cunyougo.com/flavor/衢州真.mp3");
+                            break;
+                        case 9:
+                            $(".img").attr('src', "http://app-image-test.cunyougo.com/flavor/1taizhou_r.png");
+                            $("#scream").attr('src', "http://app-image-test.cunyougo.com/flavor/2taizhou_r.png");
+                            $("#audioBtn").attr('src', "http://app-image-test.cunyougo.com/flavor/台州真.mp3");
+                            break;
+                        case 10:
+                            $(".img").attr('src', "http://app-image-test.cunyougo.com/flavor/1zhoushan_r.png");
+                            $("#scream").attr('src', "http://app-image-test.cunyougo.com/flavor/2zhoushan_r.png");
+                            $("#audioBtn").attr('src', "http://app-image-test.cunyougo.com/flavor/舟山真.mp3");
+                            break
+                    }
+                    break;
+            }
+
+            $("#audio").click(function () {
+                if (music.paused) {
+                    music.play();
+                    $("#audio").removeClass("pause").addClass("play");
+                    $("#audio").attr('src', 'http://app-image-test.cunyougo.com/flavor/play.png')
+                } else {
+                    music.pause();
+                    $("#audio").removeClass("play").addClass("pause");
+                    $("#audio").attr('src', 'http://app-image-test.cunyougo.com/flavor/stop.png')
+                }
+            });
+            $(".rg-button").click(function () {
+                $("#shareInfo").show();
+                $("#shareInfoImg").show()
+            });
+            $(".lf-button").click(function () {
+                $("#shareInfo").show();
+                $("#shareInfoImg2").show()
+            });
+            $("#icon-2").click(function () {
+                $("#shareInfo").hide();
+                $("#shareInfoImg").hide()
+            })
+            $(".icon-2").click(function () {
+                $("#shareInfo").hide();
+                $("#shareInfoImg2").hide()
+            })
+
+        })
+        ;
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+            console.log(r);
+            if (r != null) return unescape(r[2]);
+            return null; //返回参数值
+        }
+    </script>
+    <script type="text/javascript">
+            mui.init({
+                gestureConfig: {
+                    longtap: true   //默认为 false, 长按事件
+                }
+            });
+
+            mui.plusReady(function() {
+                document.addEventListener('longtap', function(e) {
+                    var target = e.target;
+
+                    var bts = [{
+                        title: "保存到手机"
+                    }];
+
+                    /**
+                     * actionSheet：弹出系统选择按钮框
+                     */
+                    plus.nativeUI.actionSheet({
+                        cancel: "取消",
+                        buttons: bts
+                    }, function(e) {
+
+                        if(e.index > 0){
+                            saveImage(target)
+                        }
+                    });
+
+                });
+            });
+
+            /**
+             * 1. 获取图片的链接
+             * 2. 创建下载并下载图片
+             * 3. 保存至相册
+             */
+            function saveImage(target) {
+                var imgUrl = target.src;
+                var timestamp = (new Date()).valueOf();
+                var downLoader = plus.downloader.createDownload(imgUrl, {
+                    method: 'GET',
+                    filename: '_downloads/image/' + timestamp + '.png'
+                }, function(download, status) {
+                    var fileName = download.filename;
+                    /**
+                     * 保存至本地相册
+                     */
+                    plus.gallery.save(fileName, function() {
+                        mui.toast("保存成功");
+
+                    });
+                });
+
+                /**
+                 * 开始下载任务
+                 */
+                try{
+                    downLoader.start();
+                }catch(e){
+                    //TODO handle the exception
+                    mui.toast("请长按图片保存");
+                }
+            }
+
+
+        </script>
+</head>
+
+<body>
+<div class="body">
+    <div class="centent">
+        <img src="" alt="" class="img">
+        <audio src="" autoplay id="audioBtn"></audio>
+        <img src="http://app-image-test.cunyougo.com/flavor/play.png" alt="" class="audio" id="audio">
+    </div>
+    <div class="bottom-button">
+        <div class="lf-button"></div>
+        <div class="rg-button"></div>
+    </div>
+    <div id="shareInfo"></div>
+    <div id="shareInfoImg">
+        <div id="icon-2"></div>
+    </div>
+
+    <div class="shareInfo"></div>
+    <div id="shareInfoImg2" >
+        <img id="scream" src="" alt="The Scream" width="273" height="423" >
+        <div class="text">长按保存图片</div>
+        <div class="icon-2"></div>
+    </div>
+    <div class="footer"></div>
+
+</div>
+
+</body>
+</html>

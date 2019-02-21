@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta name="description" content="不超过150个字符"/>
+    <meta name="keywords" content=""/>
+    <meta content="caibaojian" name="author"/>
+    <title>年味测试</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.21/vue.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .body {
+            width: 100%;
+            height: 667px;
+            background: url("http://app-image-test.cunyougo.com/flavor/bg2.png") no-repeat center;
+            background-size: 100% 100%;
+            position: absolute;
+
+        }
+        .footer {
+            width: 100%;
+            height: 100px;
+            background: url("http://app-image-test.cunyougo.com/flavor/bg2_2.png") no-repeat center;
+            background-size: 100% 100%;
+            position: absolute;
+            bottom: -100px;
+        }
+
+        .button-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding-top: 466px;
+        }
+
+        .lf {
+            width: 58px;
+            height: 54px;
+            background: url("http://app-image-test.cunyougo.com/flavor/left.png") no-repeat center;
+            background-size: 100% 100%;
+        }
+
+        .submit {
+            width: 117px;
+            height: 88px;
+            background: url("http://app-image-test.cunyougo.com/flavor/ok.png") no-repeat center;
+            background-size: 100% 100%;
+        }
+
+        .rg {
+            width: 58px;
+            height: 54px;
+            background: url("http://app-image-test.cunyougo.com/flavor/right.png") no-repeat center;
+            background-size: 100% 100%;
+        }
+
+        .middle {
+            width: 248px;
+            height: 152px;
+            position: absolute;
+            left: 20%;
+            top: 246px
+        }
+
+        .middle img {
+            max-width: 248px;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <script>
+        $(function () {
+            const width = $(window).width();
+            const param = getUrlParam("city")
+            $(".middle").width(width - 150)
+            var imgList = [
+                "http://app-image-test.cunyougo.com/flavor/hangzhou.png",
+                "http://app-image-test.cunyougo.com/flavor/ningbo.png",
+                "http://app-image-test.cunyougo.com/flavor/wenzhou.png",
+                "http://app-image-test.cunyougo.com/flavor/shaoxing.png",
+                "http://app-image-test.cunyougo.com/flavor/jiaxing.png",
+                "http://app-image-test.cunyougo.com/flavor/huzhou.png",
+                "http://app-image-test.cunyougo.com/flavor/jinhua.png",
+                "http://app-image-test.cunyougo.com/flavor/lishui.png",
+                "http://app-image-test.cunyougo.com/flavor/quzhou.png",
+                "http://app-image-test.cunyougo.com/flavor/taizhou.png",
+                "http://app-image-test.cunyougo.com/flavor/zhoushan.png"
+            ];
+            var index = 0;
+            var i = 5;
+            $(".lf").click(function () {
+                // var i = Math.floor(Math.random() * (10 + 0) + 0);
+                if(i>0){
+                    i -= 1;
+                    index = i;
+                    $("#image").attr('src', imgList[i]);
+                }
+                else {
+                    alert("第一张哟！")
+                }
+
+            });
+            $(".rg").click(function () {
+                if(i<10){
+                    i+= 1;
+                    index = i;
+                    $("#image").attr('src', imgList[i]);
+                }
+                else {
+                    alert("最后一张哟！")
+                }
+            })
+            $(".submit").click(function () {
+                if(param == index){
+                    window.location.href = "http://hz.cunyougo.com/flavor/result/?res=true&city=" + param;
+                }else{
+                    window.location.href = "http://hz.cunyougo.com/flavor/result/?res=false&city=" + param;
+                }
+            })
+        })
+
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+            if (r != null) return unescape(r[2]);
+            return null; //返回参数值
+        }
+
+    </script>
+
+</head>
+
+<body>
+<div class="body" id="app">
+    <div class="button-item">
+        <div class="lf"></div>
+        <div class="submit"></div>
+        <div class="rg"></div>
+    </div>
+    <div class="middle">
+        <img id="image" src="http://app-image-test.cunyougo.com/flavor/huzhou.png" alt="">
+    </div>
+
+</div>
+</body>
+<script>
+
+</script>
+</html>

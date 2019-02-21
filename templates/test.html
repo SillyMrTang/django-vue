@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <title></title>
+        <script type="text/javascript" src="../static/js/mui.js"></script>
+        <link rel="stylesheet" type="text/css" href="../static/js/mui.css" />
+
+        <script type="text/javascript">
+            mui.init({
+                gestureConfig: {
+                    longtap: true   //默认为 false, 长按事件
+                }
+            });
+
+            mui.plusReady(function() {
+                document.addEventListener('longtap', function(e) {
+                    alert(e)
+                    var target = e.target;
+
+                    var bts = [{
+                        title: "保存到手机"
+                    }];
+
+                    /**
+                     * actionSheet：弹出系统选择按钮框
+                     */
+                    plus.nativeUI.actionSheet({
+                        cancel: "取消",
+                        buttons: bts
+                    }, function(e) {
+
+                        if(e.index > 0){
+                            saveImage(target)
+                        }
+                    });
+
+                });
+            });
+
+            /**
+             * 1. 获取图片的链接
+             * 2. 创建下载并下载图片
+             * 3. 保存至相册
+             */
+            function saveImage(target) {
+                alert(target)
+                var imgUrl = target.src;
+                var timestamp = (new Date()).valueOf();
+                var downLoader = plus.downloader.createDownload(imgUrl, {
+                    method: 'GET',
+                    filename: '_downloads/image/' + timestamp + '.png'
+                }, function(download, status) {
+                    var fileName = download.filename;
+                    /**
+                     * 保存至本地相册
+                     */
+                    plus.gallery.save(fileName, function() {
+                        mui.toast("保存成功");
+
+                    });
+                });
+
+                /**
+                 * 开始下载任务
+                 */
+                try{
+                    downLoader.start();
+                }catch(e){
+                    //TODO handle the exception
+                    mui.toast("请长按图片保存");
+                }
+            }
+
+        </script>
+    </head>
+
+    <body>
+        <div>
+            <img src="http://cdnzzz.vcgeek.cn/forward@2x.png" alt="" />
+        </div>
+        <div>
+            <h1>nnnnnn</h1>
+        </div>
+
+        <div>
+            <img src="http://cdnzzz.vcgeek.cn/business@2x.png" alt="" />
+        </div>
+    </body>
+
+</html>

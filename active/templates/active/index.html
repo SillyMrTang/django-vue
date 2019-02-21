@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>年味大赛</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/index.css">
+    <script src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript">
+        //引入该flexible.min.js
+        $(function () {
+            $(".label-img").each(function () {
+                var index = $(this).index();            // 初始化
+                $(this).click(function () {
+                    // 点击某个元素时，给这个元素添加active类，其余兄弟元素的active类都取消
+                    $(".content >.content-item").eq(index).show().siblings(".content-item").hide();
+
+                })
+            });
+            $("#body").click(function () {
+                $("#body").attr("src", "http://app-image-test.cunyougo.com/active/zhushen2.png");
+                $("#head").attr("src", "http://app-image-test.cunyougo.com/active/zhutou1.png");
+                $("#leg").attr("src", "http://app-image-test.cunyougo.com/active/zhutui1.png");
+                $("#haslet").attr("src", "http://app-image-test.cunyougo.com/active/zhuneizang1.png")
+                $.ajax({
+                    url: "/change/",
+                    type: "GET",
+                    data: {
+                        'type': 1
+                    },
+                    success: function (data) {
+                        alert(data)
+                        $(".no-begin").hide()
+                        $(".pig-body").show()
+                    }
+                })
+
+            });
+            $("#leg").click(function () {
+                $("#body").attr("src", "http://app-image-test.cunyougo.com/active/zhushen1.png");
+                $("#head").attr("src", "http://app-image-test.cunyougo.com/active/zhutou1.png");
+                $("#leg").attr("src", "http://app-image-test.cunyougo.com/active/zhutui2.png");
+                $("#haslet").attr("src", "http://app-image-test.cunyougo.com/active/zhuneizang1.png")
+            });
+            $("#head").click(function () {
+                $("#body").attr("src", "http://app-image-test.cunyougo.com/active/zhushen1.png");
+                $("#head").attr("src", "http://app-image-test.cunyougo.com/active/zhutou2.png");
+                $("#leg").attr("src", "http://app-image-test.cunyougo.com/active/zhutui1.png");
+                $("#haslet").attr("src", "http://app-image-test.cunyougo.com/active/zhuneizang1.png")
+            });
+            $("#haslet").click(function () {
+                $("#body").attr("src", "http://app-image-test.cunyougo.com/active/zhushen1.png");
+                $("#head").attr("src", "http://app-image-test.cunyougo.com/active/zhutou1.png");
+                $("#leg").attr("src", "http://app-image-test.cunyougo.com/active/zhutui1.png");
+                $("#haslet").attr("src", "http://app-image-test.cunyougo.com/active/zhuneizang2.png")
+            });
+        })
+    </script>
+</head>
+<body>
+<div class="bg-img">
+    <div class="label-item">
+        <img class="label-img" id="head" src="http://app-image-test.cunyougo.com/active/zhutou3.png" alt="">
+        <img class="label-img" id="body" src="http://app-image-test.cunyougo.com/active/zhushen1.png" alt="">
+        <img class="label-img" id="leg" src="http://app-image-test.cunyougo.com/active/zhutui1.png"
+             style="margin-top: 20px;" alt="">
+        <img class="label-img" id="haslet" src="http://app-image-test.cunyougo.com/active/zhuneizang1.png"
+             style="margin-top: 20px;" alt="">
+        <p>活动时间:2018.12.20-2019.01.10</p>
+    </div>
+</div>
+
+
+<div class="content">
+    <div class="content-item">
+        <div class="row">
+            {% for item in pig_head_meat%}
+            <div class="col-xs-6 col-sm-4">
+                <img class="result-img{{forloop.counter}}"
+                     src="{{item.food_img}}" alt="">
+                <div class="item-info">
+                    <span>{{item.point_num}}</span>
+                    <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                </div>
+                <img class="first" src="http://app-image-test.cunyougo.com/active/{{forloop.counter}}.png" alt="">
+            </div>
+
+            {% empty %}
+            <div class="no-data">暂无作品</div>
+            {% endfor %}
+            <div class="left-label"></div>
+
+        </div>
+        <div class="row m-row">
+            {% for item in pig_mouth%}
+            <div class="col-xs-6 col-sm-4">
+                <img class="result-img{{forloop.counter}}"
+                     src="{{item.food_img}}" alt="">
+                <div class="item-info">
+                    <span>{{item.point_num}}</span>
+                    <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                </div>
+                <img class="first" src="http://app-image-test.cunyougo.com/active/{{forloop.counter}}.png" alt="">
+            </div>
+            {% empty %}
+            <div class="no-data">暂无作品</div>
+            {% endfor %}
+
+            <div class="left-label2"></div>
+        </div>
+        <div class="row m-row">
+            {% for item in pig_ear%}
+            <div class="col-xs-6 col-sm-4">
+                <img class="result-img{{forloop.counter}}"
+                     src="{{item.food_img}}" alt="">
+                <div class="item-info">
+                    <span>{{item.point_num}}</span>
+                    <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                </div>
+                <img class="first" src="http://app-image-test.cunyougo.com/active/{{forloop.counter}}.png" alt="">
+            </div>
+            {% empty %}
+            <div class="no-data">暂无作品</div>
+            {% endfor %}
+
+            <div class="left-label3"></div>
+        </div>
+        <div class="row m-row">
+            {% for item in pig_brain%}
+            <div class="col-xs-6 col-sm-4">
+                <img class="result-img{{forloop.counter}}"
+                     src="{{item.food_img}}" alt="">
+                <div class="item-info">
+                    <span>{{item.point_num}}</span>
+                    <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                </div>
+                <img class="first" src="http://app-image-test.cunyougo.com/active/{{forloop.counter}}.png" alt="">
+            </div>
+            {% empty %}
+            <div class="no-data">暂无作品</div>
+            {% endfor %}
+
+            <div class="left-label4"></div>
+        </div>
+    </div>
+    <div class="content-item body" style="display: none">
+        <div class="pig-body" style="display: none">
+            <div class="row">
+
+                {% for item in work%}
+                <div class="col-xs-6 col-sm-4">
+                    <img class="result-img{{forloop.counter}}"
+                         src="{{item.food_img}}" alt="">
+                    <div class="item-info">
+                        <span>{{item.point_num}}</span>
+                        <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                    </div>
+                    <img class="first" src="http://app-image-test.cunyougo.com/active/{{forloop.counter}}.png" alt="">
+                </div>
+
+                {% empty %}
+                <div class="no-data">{{work}}</div>
+                {% endfor %}
+
+            </div>
+            <div class="row m-row">
+                <div class="col-xs-6 col-sm-4">
+                    <img class="result-img"
+                         src="http://app-image-test.cunyougo.com/08c300e9-6abd-7be5-1bfe-3b724b519a88.jpg" alt="">
+                    <div class="item-info">
+                        <span>32570</span>
+                        <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                    </div>
+                    <img class="first" src="http://app-image-test.cunyougo.com/active/1.png" alt="">
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <img class="result-img second"
+                         src="http://app-image-test.cunyougo.com/08c300e9-6abd-7be5-1bfe-3b724b519a88.jpg" alt="">
+                    <div class="item-info">
+                        <span>31170</span>
+                        <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                    </div>
+                    <img class="first" src="http://app-image-test.cunyougo.com/active/2.png" alt="">
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <img class="result-img three"
+                         src="http://app-image-test.cunyougo.com/08c300e9-6abd-7be5-1bfe-3b724b519a88.jpg" alt="">
+                    <div class="item-info">
+                        <span>3270</span>
+                        <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                    </div>
+                    <img class="first" src="http://app-image-test.cunyougo.com/active/3.png" alt="">
+                </div>
+
+            </div>
+            <div class="row m-row">
+                <div class="col-xs-6 col-sm-4">
+                    <img class="result-img"
+                         src="http://app-image-test.cunyougo.com/08c300e9-6abd-7be5-1bfe-3b724b519a88.jpg" alt="">
+                    <div class="item-info">
+                        <span>32570</span>
+                        <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                    </div>
+                    <img class="first" src="http://app-image-test.cunyougo.com/active/1.png" alt="">
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <img class="result-img second"
+                         src="http://app-image-test.cunyougo.com/08c300e9-6abd-7be5-1bfe-3b724b519a88.jpg" alt="">
+                    <div class="item-info">
+                        <span>31170</span>
+                        <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                    </div>
+                    <img class="first" src="http://app-image-test.cunyougo.com/active/2.png" alt="">
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <img class="result-img three"
+                         src="http://app-image-test.cunyougo.com/08c300e9-6abd-7be5-1bfe-3b724b519a88.jpg" alt="">
+                    <div class="item-info">
+                        <span>3270</span>
+                        <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                    </div>
+                    <img class="first" src="http://app-image-test.cunyougo.com/active/3.png" alt="">
+                </div>
+            </div>
+            <div class="row m-row">
+                <div class="col-xs-6 col-sm-4">
+                    <img class="result-img" src="http://app-image-test.cunyougo.com/active/big.jpg" alt="">
+                    <div class="item-info">
+                        <span>32570</span>
+                        <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                    </div>
+                    <img class="first" src="http://app-image-test.cunyougo.com/active/1.png" alt="">
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <img class="result-img second" src="http://app-image-test.cunyougo.com/active/big.jpg" alt="">
+                    <div class="item-info">
+                        <span>31170</span>
+                        <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                    </div>
+                    <img class="first" src="http://app-image-test.cunyougo.com/active/2.png" alt="">
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <img class="result-img three" src="http://app-image-test.cunyougo.com/active/big.jpg" alt="">
+                    <div class="item-info">
+                        <span>3270</span>
+                        <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                    </div>
+                    <img class="first" src="http://app-image-test.cunyougo.com/active/3.png" alt="">
+                </div>
+            </div>
+            <div class="row m-row">
+                <div class="col-xs-6 col-sm-4">
+                    <img class="result-img" src="http://app-image-test.cunyougo.com/active/big.jpg" alt="">
+                    <div class="item-info">
+                        <span>32570</span>
+                        <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                    </div>
+                    <img class="first" src="http://app-image-test.cunyougo.com/active/1.png" alt="">
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <img class="result-img second" src="http://app-image-test.cunyougo.com/active/big.jpg" alt="">
+                    <div class="item-info">
+                        <span>31170</span>
+                        <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                    </div>
+                    <img class="first" src="http://app-image-test.cunyougo.com/active/2.png" alt="">
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <img class="result-img three" src="http://app-image-test.cunyougo.com/active/big.jpg" alt="">
+                    <div class="item-info">
+                        <span>3270</span>
+                        <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                    </div>
+                    <img class="first" src="http://app-image-test.cunyougo.com/active/3.png" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="no-begin">
+            活动暂未开始，尽情期待！
+        </div>
+        <div class="left-label-body"></div>
+        <div class="left-label2-body"></div>
+        <div class="left-label3-body"></div>
+        <div class="left-label4-body"></div>
+        <div class="left-label5-body"></div>
+    </div>
+    <div class="content-item let" style="display: none">
+        <div style="display: none">
+            <div class="row">
+                <div class="col-xs-6 col-sm-4">
+                    <img class="result-img"
+                         src="http://app-image-test.cunyougo.com/08c300e9-6abd-7be5-1bfe-3b724b519a88.jpg" alt="">
+                    <div class="item-info">
+                        <span>32570</span>
+                        <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                    </div>
+                    <img class="first" src="http://app-image-test.cunyougo.com/active/1.png" alt="">
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <img class="result-img second"
+                         src="http://app-image-test.cunyougo.com/08c300e9-6abd-7be5-1bfe-3b724b519a88.jpg" alt="">
+                    <div class="item-info">
+                        <span>31170</span>
+                        <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                    </div>
+                    <img class="first" src="http://app-image-test.cunyougo.com/active/2.png" alt="">
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <img class="result-img three"
+                         src="http://app-image-test.cunyougo.com/08c300e9-6abd-7be5-1bfe-3b724b519a88.jpg" alt="">
+                    <div class="item-info">
+                        <span>3270</span>
+                        <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                    </div>
+                    <img class="first" src="http://app-image-test.cunyougo.com/active/3.png" alt="">
+                </div>
+
+            </div>
+            <div class="row m-row">
+                <div class="col-xs-6 col-sm-4">
+                    <img class="result-img"
+                         src="http://app-image-test.cunyougo.com/08c300e9-6abd-7be5-1bfe-3b724b519a88.jpg" alt="">
+                    <div class="item-info">
+                        <span>32570</span>
+                        <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                    </div>
+                    <img class="first" src="http://app-image-test.cunyougo.com/active/1.png" alt="">
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <img class="result-img second"
+                         src="http://app-image-test.cunyougo.com/08c300e9-6abd-7be5-1bfe-3b724b519a88.jpg" alt="">
+                    <div class="item-info">
+                        <span>31170</span>
+                        <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                    </div>
+                    <img class="first" src="http://app-image-test.cunyougo.com/active/2.png" alt="">
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <img class="result-img three"
+                         src="http://app-image-test.cunyougo.com/08c300e9-6abd-7be5-1bfe-3b724b519a88.jpg" alt="">
+                    <div class="item-info">
+                        <span>3270</span>
+                        <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                    </div>
+                    <img class="first" src="http://app-image-test.cunyougo.com/active/3.png" alt="">
+                </div>
+
+            </div>
+            <div class="row m-row">
+                <div class="col-xs-6 col-sm-4">
+                    <img class="result-img"
+                         src="http://app-image-test.cunyougo.com/08c300e9-6abd-7be5-1bfe-3b724b519a88.jpg" alt="">
+                    <div class="item-info">
+                        <span>32570</span>
+                        <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                    </div>
+                    <img class="first" src="http://app-image-test.cunyougo.com/active/1.png" alt="">
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <img class="result-img second"
+                         src="http://app-image-test.cunyougo.com/08c300e9-6abd-7be5-1bfe-3b724b519a88.jpg" alt="">
+                    <div class="item-info">
+                        <span>31170</span>
+                        <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                    </div>
+                    <img class="first" src="http://app-image-test.cunyougo.com/active/2.png" alt="">
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <img class="result-img three"
+                         src="http://app-image-test.cunyougo.com/08c300e9-6abd-7be5-1bfe-3b724b519a88.jpg" alt="">
+                    <div class="item-info">
+                        <span>3270</span>
+                        <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                    </div>
+                    <img class="first" src="http://app-image-test.cunyougo.com/active/3.png" alt="">
+                </div>
+
+            </div>
+        </div>
+        <div class="no-begin  two-data">
+            活动暂未开始，尽情期待！
+        </div>
+        <div class="left-label-let"></div>
+        <div class="left-label2-let"></div>
+        <div class="left-label3-let"></div>
+    </div>
+    <div class="content-item haslet" style="display: none">
+        <div style="display: none">
+            <div class="row">
+                <div class="col-xs-6 col-sm-4">
+                    <img class="result-img"
+                         src="http://app-image-test.cunyougo.com/08c300e9-6abd-7be5-1bfe-3b724b519a88.jpg" alt="">
+                    <div class="item-info">
+                        <span>32570</span>
+                        <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                    </div>
+                    <img class="first" src="http://app-image-test.cunyougo.com/active/1.png" alt="">
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <img class="result-img second"
+                         src="http://app-image-test.cunyougo.com/08c300e9-6abd-7be5-1bfe-3b724b519a88.jpg" alt="">
+                    <div class="item-info">
+                        <span>31170</span>
+                        <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                    </div>
+                    <img class="first" src="http://app-image-test.cunyougo.com/active/2.png" alt="">
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <img class="result-img three"
+                         src="http://app-image-test.cunyougo.com/08c300e9-6abd-7be5-1bfe-3b724b519a88.jpg" alt="">
+                    <div class="item-info">
+                        <span>3270</span>
+                        <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                    </div>
+                    <img class="first" src="http://app-image-test.cunyougo.com/active/3.png" alt="">
+                </div>
+            </div>
+            <div class="row m-row">
+                <div class="col-xs-6 col-sm-4">
+                    <img class="result-img"
+                         src="http://app-image-test.cunyougo.com/08c300e9-6abd-7be5-1bfe-3b724b519a88.jpg" alt="">
+                    <div class="item-info">
+                        <span>32570</span>
+                        <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                    </div>
+                    <img class="first" src="http://app-image-test.cunyougo.com/active/1.png" alt="">
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <img class="result-img second"
+                         src="http://app-image-test.cunyougo.com/08c300e9-6abd-7be5-1bfe-3b724b519a88.jpg" alt="">
+                    <div class="item-info">
+                        <span>31170</span>
+                        <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                    </div>
+                    <img class="first" src="http://app-image-test.cunyougo.com/active/2.png" alt="">
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <img class="result-img three"
+                         src="http://app-image-test.cunyougo.com/08c300e9-6abd-7be5-1bfe-3b724b519a88.jpg" alt="">
+                    <div class="item-info">
+                        <span>3270</span>
+                        <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                    </div>
+                    <img class="first" src="http://app-image-test.cunyougo.com/active/3.png" alt="">
+                </div>
+            </div>
+            <div class="row m-row">
+                <div class="col-xs-6 col-sm-4">
+                    <img class="result-img"
+                         src="http://app-image-test.cunyougo.com/08c300e9-6abd-7be5-1bfe-3b724b519a88.jpg" alt="">
+                    <div class="item-info">
+                        <span>32570</span>
+                        <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                    </div>
+                    <img class="first" src="http://app-image-test.cunyougo.com/active/1.png" alt="">
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <img class="result-img second"
+                         src="http://app-image-test.cunyougo.com/08c300e9-6abd-7be5-1bfe-3b724b519a88.jpg" alt="">
+                    <div class="item-info">
+                        <span>31170</span>
+                        <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                    </div>
+                    <img class="first" src="http://app-image-test.cunyougo.com/active/2.png" alt="">
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <img class="result-img three"
+                         src="http://app-image-test.cunyougo.com/08c300e9-6abd-7be5-1bfe-3b724b519a88.jpg" alt="">
+                    <div class="item-info">
+                        <span>3270</span>
+                        <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                    </div>
+                    <img class="first" src="http://app-image-test.cunyougo.com/active/3.png" alt="">
+                </div>
+            </div>
+            <div class="row m-row">
+                <div class="col-xs-6 col-sm-4">
+                    <img class="result-img" src="http://app-image-test.cunyougo.com/active/big.jpg" alt="">
+                    <div class="item-info">
+                        <span>32570</span>
+                        <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                    </div>
+                    <img class="first" src="http://app-image-test.cunyougo.com/active/1.png" alt="">
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <img class="result-img second" src="http://app-image-test.cunyougo.com/active/big.jpg" alt="">
+                    <div class="item-info">
+                        <span>31170</span>
+                        <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                    </div>
+                    <img class="first" src="http://app-image-test.cunyougo.com/active/2.png" alt="">
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <img class="result-img three" src="http://app-image-test.cunyougo.com/active/big.jpg" alt="">
+                    <div class="item-info">
+                        <span>3270</span>
+                        <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                    </div>
+                    <img class="first" src="http://app-image-test.cunyougo.com/active/3.png" alt="">
+                </div>
+            </div>
+            <div class="row m-row">
+                <div class="col-xs-6 col-sm-4">
+                    <img class="result-img" src="http://app-image-test.cunyougo.com/active/big.jpg" alt="">
+                    <div class="item-info">
+                        <span>32570</span>
+                        <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                    </div>
+                    <img class="first" src="http://app-image-test.cunyougo.com/active/1.png" alt="">
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <img class="result-img second" src="http://app-image-test.cunyougo.com/active/big.jpg" alt="">
+                    <div class="item-info">
+                        <span>31170</span>
+                        <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                    </div>
+                    <img class="first" src="http://app-image-test.cunyougo.com/active/2.png" alt="">
+                </div>
+                <div class="col-xs-6 col-sm-4">
+                    <img class="result-img three" src="http://app-image-test.cunyougo.com/active/big.jpg" alt="">
+                    <div class="item-info">
+                        <span>3270</span>
+                        <img src="http://app-image-test.cunyougo.com/active/zan.png" alt="">
+                    </div>
+                    <img class="first" src="http://app-image-test.cunyougo.com/active/3.png" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="no-begin">
+            活动暂未开始，尽情期待！
+        </div>
+        <div class="left-label-haslet"></div>
+        <div class="left-label2-haslet"></div>
+        <div class="left-label3-haslet"></div>
+        <div class="left-label4-haslet"></div>
+        <div class="left-label5-haslet"></div>
+    </div>
+    <div class="more"></div>
+    <div class="rule-title"></div>
+    <div class="left-img"></div>
+    <div class="rule-info"></div>
+</div>
+<div class="footer">
+    <img src="http://app-image-test.cunyougo.com/active/fenxiang.png" class="footer-img" alt="">
+</div>
+</body>
+
+</html>
