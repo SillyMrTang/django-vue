@@ -41,7 +41,7 @@ olefile==0.44
 opencv-python==3.4.0.12
 openpyxl==2.4.8
 optionaldict==0.1.1
-Pillow==4.3.0
+Pillow==6.2.0
 pycryptodome==3.4.7
 PyJWT==1.5.3
 PyMySQL==0.8.0
