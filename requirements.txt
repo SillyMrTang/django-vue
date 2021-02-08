@@ -24,7 +24,7 @@ DjangoUeditor==1.8.143
 drf-extensions==0.3.1
 et-xmlfile==1.0.1
 future==0.16.0
-httplib2==0.10.3
+httplib2==0.19.0
 idna==2.6
 itchat==1.2.32
 itypes==1.1.0
