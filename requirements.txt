@@ -62,7 +62,7 @@ social-auth-core==1.4.0
 tablib==0.12.1
 unicodecsv==0.14.1
 uritemplate==3.0.0
-urllib3==1.22
+urllib3==1.26.5
 uWSGI==2.0.15
 wechatpy==1.6.0
 WeRoBot==1.2.0
